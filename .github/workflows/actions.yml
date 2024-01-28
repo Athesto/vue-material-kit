@@ -10,6 +10,9 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
+      - name: Setup Node
+        run: |
+          pnpm install
       - name: npm run deploy
         run: |
           npm run deploy
