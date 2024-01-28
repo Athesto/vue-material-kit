@@ -10,13 +10,19 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
+      - name: Setup pnpm
       - uses: pnpm/action-setup@v2
         with:
           version: 8
-      - name: Setup Node
+      - name: Install dependencies
         run: |
           pnpm install
-      - name: npm run deploy
+      - name: Build
         run: |
-          npm run deploy
+          pnpm build
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
       - run: echo "🍏 This job's status is ${{ job.status }}
